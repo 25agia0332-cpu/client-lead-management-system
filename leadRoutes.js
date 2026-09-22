@@ -1,0 +1,11 @@
+const express = require("express");
+const Lead = require("../models/Lead");
+const auth = require("../middleware/authMiddleware");
+const router = express.Router();
+router.use(auth);
+router.get("/", async (req,res) => { try { res.json(await Lead.find().sort({createdAt:-1})); } catch { res.status(500).json({message:"Failed to fetch leads"}); } });
+router.get("/:id", async (req,res) => { try { const x=await Lead.findById(req.params.id); if(!x)return res.status(404).json({message:"Lead not found"}); res.json(x); } catch { res.status(400).json({message:"Invalid lead ID"}); } });
+router.post("/", async (req,res) => { try { res.status(201).json(await Lead.create(req.body)); } catch(e) { res.status(400).json({message:e.message}); } });
+router.put("/:id", async (req,res) => { try { const x=await Lead.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true}); if(!x)return res.status(404).json({message:"Lead not found"}); res.json(x); } catch(e) { res.status(400).json({message:e.message}); } });
+router.delete("/:id", async (req,res) => { try { const x=await Lead.findByIdAndDelete(req.params.id); if(!x)return res.status(404).json({message:"Lead not found"}); res.json({message:"Lead deleted successfully"}); } catch { res.status(400).json({message:"Invalid lead ID"}); } });
+module.exports = router;

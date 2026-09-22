@@ -1,50 +1,48 @@
 # Client Lead Management System (Mini CRM)
 
-A simple full-stack CRM application for managing client leads generated from website contact forms.
+A beginner-friendly full-stack Mini CRM for managing website client leads.
 
 ## Features
+- Admin login with JWT authentication
+- Dashboard statistics
+- Create, view, edit and delete leads
+- Search and status filtering
+- Statuses: New, Contacted, Converted
+- Notes and follow-up date
+- Responsive mobile-friendly interface
+- MongoDB database
 
-- Admin login
-- Add new client leads
-- View all leads
-- Search leads
-- Update lead status
-- Add notes and follow-ups
-- Edit leads
-- Delete leads
-- Responsive dashboard
+## Tech Stack
+HTML, CSS, JavaScript, Node.js, Express.js, MongoDB, JWT, bcrypt
 
-## Technologies Used
+## Structure
+```text
+client-lead-management-system/
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── backend/
+│   ├── config/db.js
+│   ├── middleware/authMiddleware.js
+│   ├── models/Lead.js
+│   ├── routes/authRoutes.js
+│   ├── routes/leadRoutes.js
+│   ├── .env.example
+│   ├── package.json
+│   └── server.js
+├── .gitignore
+└── README.md
+```
 
-### Frontend
-- HTML
-- CSS
-- JavaScript
+## Setup
+1. Install Node.js.
+2. Create a MongoDB Atlas database.
+3. Copy `backend/.env.example` to `backend/.env`.
+4. Put your MongoDB connection string in `MONGO_URI` and set a long `JWT_SECRET`.
+5. In `backend/`, run `npm install` then `npm start`.
+6. Open `http://localhost:5000`.
 
-### Backend
-- Node.js
-- Express.js
+Demo admin defaults are `admin@example.com` / `Admin@123`; change them before public deployment.
 
-### Database
-- MongoDB
-
-## Lead Status
-
-- New
-- Contacted
-- Converted
-
-## Project Purpose
-
-This project was developed as part of an internship task to demonstrate CRUD operations, backend development, database management and business workflow management.
-
-## Author
-
-**Arpula Charanteja**
-
-B.Tech Mechanical Engineering  
-ACE Engineering College
-
-## GitHub
-
-https://github.com/25agia0332-cpu/client-lead-management-system
+Never commit `backend/.env` or your MongoDB password.

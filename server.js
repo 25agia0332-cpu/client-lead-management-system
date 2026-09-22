@@ -1,0 +1,11 @@
+require("dotenv").config();
+const path=require("path"), express=require("express"), cors=require("cors");
+const connectDB=require("./config/db");
+const authRoutes=require("./routes/authRoutes"), leadRoutes=require("./routes/leadRoutes");
+const app=express(), PORT=process.env.PORT||5000;
+connectDB();
+app.use(cors()); app.use(express.json());
+app.use("/api/auth",authRoutes); app.use("/api/leads",leadRoutes);
+app.use(express.static(path.join(__dirname,"..","frontend")));
+app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"..","frontend","index.html")));
+app.listen(PORT,()=>console.log(`CRM server running on port ${PORT}`));
